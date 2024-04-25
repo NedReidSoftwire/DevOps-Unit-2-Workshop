@@ -124,7 +124,7 @@ goto calc / 27 9
 - Finally, we will navigate the following file: [Step 4](https://gist.githubusercontent.com/Jonesey13/d722ce5dfb70770cdd83800e0f180e98/raw/ac0452c456e2bb7806a54c8c6433b96649fc9b25/step_4.txt)
 - This has some additional statements.​
 - The goal is to process the file, starting from line 1, stopping when you’ve hit a statement you’ve seen before or manage to jump outside the file by a goto.​
-- When finished, please send the line number & statement to the trainer to confirm.​
+- When finished, please send the line number & statement to the PDE to confirm.​
 - There are additional statements you need to be able to process.
 
 #### New statement: Remove lines
