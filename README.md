@@ -12,17 +12,14 @@ The objective of the morning is:
 
 ### Set up
 We’re going to start by forking an application. 
-- This is a Pub Quiz written in Python that exists on GitHub.
-- You can find it here: https://github.com/corndeladmin/devops-pub-quiz
+- This is a Pub Quiz written in Python that exists on GitHub
+- **The workshop organiser will provide you with a GitHub classroom link that will automatically create a fork of this application**
 
-Fork the repository by pressing the "Fork" button. 
-- You can read more about forking on various resources, including [How to Fork a GitHub Repository – A Complete Workflow](https://www.freecodecamp.org/news/how-to-fork-a-github-repository/)
-
-Next clone the repo to your machine by following these instructions:
-- Go to the main page of the repository you want to clone on GitHub.com (in this case, just follow the link above)
+Once you have the repository forked, clone the repo to your machine by following these instructions:
+- Go to the main page of the forked repository
 - Click on the green "Code" button. A small window will pop up showing the repository URL.
 - Copy the repository URL. You can click the copy icon next to the URL to copy it to your clipboard.
-- Open your terminal (Mac/Linux, including ACG) or Git Bash (Windows).
+- Open a terminal.
 - Navigate to the directory where you want the cloned repository to be saved using the cd command. For example: `cd /path/to/your/directory`
 - Run the `git clone` command followed by the URL you copied. For example: `git clone https://github.com/username/repository.git`
 - Press Enter. Git will start cloning the repository to your local machine to a subfolder with the repository name.
@@ -37,7 +34,7 @@ Read the existing application and understand how it works.
 Once you're satisfied that the code works and you understand at least at some level how it works, let’s modify it.
 
 Your goal for this exercise is to improve the Pub Quiz experience for the user
-- The simplest way to do this is simply to add a single question!
+- The simplest way to do this is to add a single question!
 - If you’ve done that, you should expand your efforts:
     - Replace the existing questions with ones of your own
     - You can give the user a score at the end by keeping track of it
@@ -45,7 +42,7 @@ Your goal for this exercise is to improve the Pub Quiz experience for the user
     - Or any other change you are inspired to make!
 
 ### Following the Pull Request Workflow
-Once you've made your first change (and are happy with it!), you should create a new branch and make a commit.
+Once you've made your first change (and are happy with it!), you should **create a new branch** and make a commit.
 
 After making your first commit push the branch to GitHub and raise a Pull Request (PR)
 - When pushing your local branch for the first time you will be asked to set the name of the upstream/remote branch (normally this is the same as your local branch name)
@@ -54,7 +51,7 @@ After making your first commit push the branch to GitHub and raise a Pull Reques
 **Roughly an hour to half an hour before lunch we’ll get everyone to give each other feedback.**
 - At this point, you should update your PR to contain all your latest changes, and provide a link to the PR to your PDE. 
 - Your PDE will pass your PR to someone else, and pass you a link to someone else’s PR.
-- Download their code and run it on your machine. GitHub shows you how to do it here: [GitHub Guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally)
+- Download their code and run it on your machine. You will need to `git clone` their repository into a folder separate from your own.
 - Play their quiz - prepare some feedback! 
     - Too easy? Too hard? Could use more questions? Fewer questions? Spotted a typo? 
     - Leave the feedback on their PR.
