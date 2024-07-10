@@ -17,7 +17,8 @@ We’re going to start by forking an application.
 
 Once you have the repository forked, clone the repo to your machine by following these instructions:
 - Go to the main page of the forked repository
-- Click on the green "Code" button. A small window will pop up showing the repository URL.
+- Click on the green "Code" button. A small window will pop up showing the repository URL 
+    - Make sure you toggle HTTPS in the popup window unless you want to [setup SSH key access](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh)
 - Copy the repository URL. You can click the copy icon next to the URL to copy it to your clipboard.
 - Open a terminal.
 - Navigate to the directory where you want the cloned repository to be saved using the cd command. For example: `cd /path/to/your/directory`
