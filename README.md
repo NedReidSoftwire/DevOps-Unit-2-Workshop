@@ -11,45 +11,53 @@ The objective of the morning is:
 - To get familiarity with modifying an existing Python application 
 
 ### Set up
-- We’re going to start by forking an application. 
-- This application is a Pub Quiz application that exists on GitHub.
-- You can find it here: https://github.com/corndeladmin/devops-pub-quiz
-- Fork it by pressing the "Fork" button. 
-    - You can read more about forking on various resources, including [How to Fork a GitHub Repository – A Complete Workflow](https://www.freecodecamp.org/news/how-to-fork-a-github-repository/)
-- Clone the repo to your machine by following these instructions:
-    - Go to the main page of the repository you want to clone on GitHub.com (in this case, just follow the link above)
-    - Click on the green "Code" button. A small window will pop up showing the repository URL.
-    - Copy the repository URL. You can click the copy icon next to the URL to copy it to your clipboard.
-    - Open your terminal (Mac/Linux, including ACG) or Git Bash (Windows).
-    - Navigate to the directory where you want the cloned repository to be saved using the cd command. For example: `cd /path/to/your/directory`
-    - Run the `git clone` command followed by the URL you copied. For example: `git clone https://github.com/username/repository.git`
-    - Press Enter. Git will start cloning the repository to your local machine.
-- Once it's downloaded, open it in Visual Studio Code.
+We’re going to start by forking an application. 
+- This is a Pub Quiz written in Python that exists on GitHub
+- **The workshop organiser will provide you with a GitHub classroom link that will automatically create a fork of this application**
 
-### Doing the work
-- In VS Code, read the existing application and understand how it works.
-- Run it by doing `python app.py`
-- lt should run, and you should experience a simple quiz with 2 sample questions!
-- Now you’re satisfied that the code works and you understand at least at some level how it works, let’s modify it.
-- Your goal for this is to improve the Pub Quiz experience for the user
-    - The simplest way to do this is simply to add a single question!
-    - If you’ve done that, you should expand your efforts:
-        - Replace the existing questions with ones of your own!
-        - You can give the user a score at the end by keeping track of it
-        - You could create non-multiple choice questions 
-        - Or any other change you are inspired to make!
+Once you have the repository forked, clone the repo to your machine by following these instructions:
+- Go to the main page of the forked repository
+- Click on the green "Code" button. A small window will pop up showing the repository URL 
+    - Make sure you toggle HTTPS in the popup window unless you want to [setup SSH key access](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh)
+- Copy the repository URL. You can click the copy icon next to the URL to copy it to your clipboard.
+- Open a terminal.
+- Navigate to the directory where you want the cloned repository to be saved using the cd command. For example: `cd /path/to/your/directory`
+- Run the `git clone` command followed by the URL you copied. For example: `git clone https://github.com/username/repository.git`
+- Press Enter. Git will start cloning the repository to your local machine to a subfolder with the repository name.
 
-### Doing the workflow
-- Once you’ve made your first change, you should commit it to Git and push it to GitHub. 
-    - Check that you are able to make a PR - read and follow these instructions: [Creating a pull request - GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
-- Roughly an hour to half an hour before lunch we’ll get everyone to give each other feedback.
-    - At this point, you should update your PR to contain all your latest changes, and provide a link to the PR to your PDE. 
-    - Your PDE will pass your PR to someone else, and pass you a link to someone else’s PR.
-    - Download their code and run it on your machine. GitHub shows you how to do it here: [GitHub Guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally)
-    - Play their quiz - prepare some feedback! 
-        - Too easy? Too hard? Could use more questions? Fewer questions? Spotted a typo? 
-        - Leave the feedback on their PR.
-- Normally in a PR workflow, your feedback will either indicate a change that will ideally be made before the PR is merged, or it can indicate a problem that definitely needs to be addressed before the PR is merged (e.g. a bug or security flaw). For the purposes of this exercise, all feedback can be considered optional - if you can action any of the feedback before merging the PR, please do. Otherwise, do just merge the PR and you can always work on the feedback later!
+Once you have have cloned the repository locally, open the folder in Visual Studio Code.
+
+### Making Improvements
+Read the existing application and understand how it works.
+- You can start the application by running `python app.py` in a terminal
+- It should then run, and you will experience a simple quiz with 2 sample questions!
+
+Once you're satisfied that the code works and you understand at least at some level how it works, let’s modify it.
+
+Your goal for this exercise is to improve the Pub Quiz experience for the user
+- The simplest way to do this is to add a single question!
+- If you’ve done that, you should expand your efforts:
+    - Replace the existing questions with ones of your own
+    - You can give the user a score at the end by keeping track of it
+    - You could create non-multiple choice questions 
+    - Or any other change you are inspired to make!
+
+### Following the Pull Request Workflow
+Once you've made your first change (and are happy with it!), you should **create a new branch** and make a commit.
+
+After making your first commit push the branch to GitHub and raise a Pull Request (PR)
+- When pushing your local branch for the first time you will be asked to set the name of the upstream/remote branch (normally this is the same as your local branch name)
+- Check that you are able to make a PR - read and follow these instructions: [Creating a pull request - GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+
+**Roughly an hour to half an hour before lunch we’ll get everyone to give each other feedback.**
+- At this point, you should update your PR to contain all your latest changes, and provide a link to the PR to your PDE. 
+- Your PDE will pass your PR to someone else, and pass you a link to someone else’s PR.
+- Download their code and run it on your machine. You will need to `git clone` their repository into a folder separate from your own.
+- Play their quiz - prepare some feedback! 
+    - Too easy? Too hard? Could use more questions? Fewer questions? Spotted a typo? 
+    - Leave the feedback on their PR.
+
+Normally in a PR workflow, your feedback will either indicate a change that will ideally be made before the PR is merged, or it can indicate a problem that definitely needs to be addressed before the PR is merged (e.g. a bug or security flaw). For the purposes of this exercise, all feedback can be considered optional - if you can action any of the feedback before merging the PR, please do. Otherwise, do just merge the PR and you can always work on the feedback later!
 - In any case, after your PR has merged, you will have completed the core goals of the morning exercise - engage in stretch by continuing to action feedback until the Lunch break.
 
 ## Afternoon
