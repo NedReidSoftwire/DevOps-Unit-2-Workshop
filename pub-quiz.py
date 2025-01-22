@@ -4,6 +4,7 @@ import os
 import json
 from pydantic import BaseModel
 from typing import TypedDict, List
+from gui_question import show_gui_question
 
 class QuizQuestion(BaseModel):
     question: str
@@ -18,6 +19,7 @@ load_dotenv()
 QUIZ_DATA_JSON_FILEPATH = 'quiz-data.json'
 QUESTIONS_JSON_KEY = 'questions'
 client = InferenceClient("meta-llama/Meta-Llama-3-8B-Instruct", token=os.getenv('TOKEN'))
+GUI_ENABLED = True
 
 def load_quiz_questions(json_filepath: str) -> List[QuizQuestion]:
     try:
@@ -48,23 +50,31 @@ for question in quiz_questions:
     messages = [{"role": "user",
                  "content": f' rewrite the following question as if you are a DevOps trainer named Ray. Ray starts his questions by saying his name. '
                             f'Include lots of DevOps words like 7000x more deployments. Make responses short and snappy: {question_text}'}]
-    print(client.chat_completion(messages, max_tokens=150).get('choices')[0].get('message').get('content'))
+    question_text = client.chat_completion(messages, max_tokens=150).get('choices')[0].get('message').get('content')
 
     question_options = question.options
+    formatted_options = []
     for i, option in enumerate(question_options):
         option_id = chr(ord('A') + i)
-        print(f"{option_id}) {option}")
+        formatted_options.append(f"{option_id}) {option}")
 
-    user_answer = input("Your answer (A, B, C, D): ").strip().upper()
-    user_answer_index = ord(user_answer) - ord('A')
-
-    question_correct_answer_index = question.answerIndex
-    if user_answer_index == question_correct_answer_index:
-        print("Correct!")
-        score += 1
+    if (GUI_ENABLED):
+        show_gui_question(question_text, formatted_options, question.answerIndex)
     else:
-        question_correct_answer = question_options[question_correct_answer_index]
-        print(f"Wrong! The correct answer was {question_correct_answer}.")
+        print(question_text)
+        for option in enumerate(formatted_options):
+            print(option)
+
+        user_answer = input("Your answer (A, B, C, D): ").strip().upper()
+        user_answer_index = ord(user_answer) - ord('A')
+
+        question_correct_answer_index = question.answerIndex
+        if user_answer_index == question_correct_answer_index:
+            print("Correct!")
+            score += 1
+        else:
+            question_correct_answer = question_options[question_correct_answer_index]
+            print(f"Wrong! The correct answer was {question_correct_answer}.")
 
 print("Thanks for playing the Pub Quiz!")
 print(f"Your final score is {score}")
