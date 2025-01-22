@@ -39,8 +39,9 @@ except Exception as e:
 for question in quiz_questions:
     question_text = question["question"]
     messages = [{"role": "user",
-                 "content": f' rewrite the following question as if you are a pirate named Ray: {question_text}'}]
-    print(client.chat_completion(messages, max_tokens=100).get('choices')[0].get('message').get('content'))
+                 "content": f' rewrite the following question as if you are a DevOps trainer named Ray. Ray starts his questions by saying his name. '
+                            f'Include lots of DevOps words like 7000x more deployments. Make responses short and snappy: {question_text}'}]
+    print(client.chat_completion(messages, max_tokens=150).get('choices')[0].get('message').get('content'))
 
     question_options = question["options"]
     for i, option in enumerate(question_options):
