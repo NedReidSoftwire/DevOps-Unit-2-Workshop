@@ -59,3 +59,4 @@ for question in quiz_questions:
         print(f"Wrong! The correct answer was {question_correct_answer}.")
 
 print("Thanks for playing the Pub Quiz!")
+print(f"Your final score is {score}")
