@@ -2,14 +2,15 @@ from huggingface_hub import InferenceClient
 from dotenv import load_dotenv
 import os
 import json
+from pydantic import BaseModel
 from typing import TypedDict, List
 
-class QuizQuestion(TypedDict):
+class QuizQuestion(BaseModel):
     question: str
     options: List[str]
     answerIndex: int
 
-class QuizData(TypedDict):
+class QuizData(BaseModel):
     questions: List[QuizQuestion]
 
 load_dotenv()
@@ -21,10 +22,7 @@ client = InferenceClient("meta-llama/Meta-Llama-3-8B-Instruct", token=os.getenv(
 def load_quiz_questions(json_filepath: str) -> List[QuizQuestion]:
     try:
         with open(json_filepath, 'r') as file:
-            data: QuizData = json.load(file)
-
-            if QUESTIONS_JSON_KEY not in data:
-                raise KeyError("Quiz questions not found in JSON structure")
+            data = QuizData.model_validate_json(file.read())
 
             questions = data.questions
             if not questions:
