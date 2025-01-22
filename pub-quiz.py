@@ -21,7 +21,6 @@ def load_quiz_questions(json_filepath: str):
     except json.JSONDecodeError as e:
         raise json.JSONDecodeError(f"Invalid JSON format in {json_filepath}", e.doc, e.pos) from e
 
-# Welcome message for the quiz
 print("Welcome to the Pub Quiz!")
 
 try:
@@ -30,21 +29,23 @@ except Exception as e:
     print(f"Error loading quiz questions: {e}")
     exit(1)
 
-# Loop through each question
 for question in quiz_questions:
-    # Display the question and options
-    print(question["question"])
-    for option in question["options"]:
-        print(option)
+    question_text = question["question"]
+    print(question_text)
 
-    # Get the user's answer
-    user_answer = input("Your answer (A, B, C, D): ").strip().upper()  # Ensuring the input is uppercase for comparison
+    question_options = question["options"]
+    for i, option in enumerate(question_options):
+        option_id = chr(ord('A') + i)
+        print(f"{option_id}) {option}")
 
-    # Check if the answer is correct
-    if user_answer == question["answer"]:
+    user_answer = input("Your answer (A, B, C, D): ").strip().upper()
+    user_answer_index = ord(user_answer) - ord('A')
+
+    question_correct_answer_index = question["answerIndex"]
+    if user_answer_index == question_correct_answer_index:
         print("Correct!")
     else:
-        print(f"Wrong! The correct answer was {question['answer']}.")
+        question_correct_answer = question_options[question_correct_answer_index]
+        print(f"Wrong! The correct answer was {question_correct_answer}.")
 
-# Goodbye message
 print("Thanks for playing the Pub Quiz!")
