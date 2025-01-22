@@ -12,8 +12,8 @@ def update_button_colours(selected, option_buttons, options, answer):
 def show_gui_question(question: str, options: list[str], answer: int):
     option_buttons = [sg.Button(option) for option in options]
     layout = [
-        [sg.Text(question, size=(40, None))],
-        option_buttons
+        [sg.Push(), sg.Text(question, justification='center', size=(40, None)), sg.Push()],
+        [sg.Push(), option_buttons, sg.Push()]
     ]
 
     window = sg.Window('Pub quiz', layout)

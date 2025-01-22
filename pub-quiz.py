@@ -5,6 +5,7 @@ import json
 from pydantic import BaseModel
 from typing import TypedDict, List
 from gui_question import show_gui_question
+from gui_final_score import show_gui_score
 
 class QuizQuestion(BaseModel):
     question: str
@@ -76,5 +77,11 @@ for question in quiz_questions:
             question_correct_answer = question_options[question_correct_answer_index]
             print(f"Wrong! The correct answer was {question_correct_answer}.")
 
-print("Thanks for playing the Pub Quiz!")
-print(f"Your final score is {score}")
+final_score_text = f"Your final score is {score}"
+thanks_for_playing_text = f"Thanks for playing the Pub Quiz!"
+
+if (GUI_ENABLED):
+    show_gui_score(final_score_text, thanks_for_playing_text)
+else:
+    print(thanks_for_playing_text)
+    print(final_score_text)
