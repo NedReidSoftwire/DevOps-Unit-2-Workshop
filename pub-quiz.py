@@ -2,6 +2,16 @@ from huggingface_hub import InferenceClient
 from dotenv import load_dotenv
 import os
 import json
+from pydantic import BaseModel
+from typing import TypedDict, List
+
+class QuizQuestion(BaseModel):
+    question: str
+    options: List[str]
+    answerIndex: int
+
+class QuizData(BaseModel):
+    questions: List[QuizQuestion]
 
 load_dotenv()
 
@@ -9,15 +19,12 @@ QUIZ_DATA_JSON_FILEPATH = 'quiz-data.json'
 QUESTIONS_JSON_KEY = 'questions'
 client = InferenceClient("meta-llama/Meta-Llama-3-8B-Instruct", token=os.getenv('TOKEN'))
 
-def load_quiz_questions(json_filepath: str):
+def load_quiz_questions(json_filepath: str) -> List[QuizQuestion]:
     try:
         with open(json_filepath, 'r') as file:
-            data = json.load(file)
+            data = QuizData.model_validate_json(file.read())
 
-            if QUESTIONS_JSON_KEY not in data:
-                raise KeyError("Quiz questions not found in JSON structure")
-
-            questions = data[QUESTIONS_JSON_KEY]
+            questions = data.questions
             if not questions:
                 raise ValueError("Quiz questions array is empty")
 
@@ -37,13 +44,13 @@ except Exception as e:
     exit(1)
 
 for question in quiz_questions:
-    question_text = question["question"]
+    question_text = question.question
     messages = [{"role": "user",
                  "content": f' rewrite the following question as if you are a DevOps trainer named Ray. Ray starts his questions by saying his name. '
                             f'Include lots of DevOps words like 7000x more deployments. Make responses short and snappy: {question_text}'}]
     print(client.chat_completion(messages, max_tokens=150).get('choices')[0].get('message').get('content'))
 
-    question_options = question["options"]
+    question_options = question.options
     for i, option in enumerate(question_options):
         option_id = chr(ord('A') + i)
         print(f"{option_id}) {option}")
@@ -51,7 +58,7 @@ for question in quiz_questions:
     user_answer = input("Your answer (A, B, C, D): ").strip().upper()
     user_answer_index = ord(user_answer) - ord('A')
 
-    question_correct_answer_index = question["answerIndex"]
+    question_correct_answer_index = question.answerIndex
     if user_answer_index == question_correct_answer_index:
         print("Correct!")
         score += 1
