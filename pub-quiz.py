@@ -1,7 +1,13 @@
+from huggingface_hub import InferenceClient
+from dotenv import load_dotenv
+import os
 import json
+
+load_dotenv()
 
 QUIZ_DATA_JSON_FILEPATH = 'quiz-data.json'
 QUESTIONS_JSON_KEY = 'questions'
+client = InferenceClient("meta-llama/Meta-Llama-3-8B-Instruct", token=os.getenv('TOKEN'))
 
 def load_quiz_questions(json_filepath: str):
     try:
@@ -22,6 +28,7 @@ def load_quiz_questions(json_filepath: str):
         raise json.JSONDecodeError(f"Invalid JSON format in {json_filepath}", e.doc, e.pos) from e
 
 print("Welcome to the Pub Quiz!")
+score = 0
 
 try:
     quiz_questions = load_quiz_questions(QUIZ_DATA_JSON_FILEPATH)
@@ -31,7 +38,9 @@ except Exception as e:
 
 for question in quiz_questions:
     question_text = question["question"]
-    print(question_text)
+    messages = [{"role": "user",
+                 "content": f' rewrite the following question as if you are a pirate named Ray: {question_text}'}]
+    print(client.chat_completion(messages, max_tokens=100).get('choices')[0].get('message').get('content'))
 
     question_options = question["options"]
     for i, option in enumerate(question_options):
@@ -44,8 +53,10 @@ for question in quiz_questions:
     question_correct_answer_index = question["answerIndex"]
     if user_answer_index == question_correct_answer_index:
         print("Correct!")
+        score += 1
     else:
         question_correct_answer = question_options[question_correct_answer_index]
         print(f"Wrong! The correct answer was {question_correct_answer}.")
 
 print("Thanks for playing the Pub Quiz!")
+print(f"Your final score is {score}")
