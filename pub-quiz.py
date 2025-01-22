@@ -1,20 +1,34 @@
+import json
+
+QUIZ_DATA_JSON_FILEPATH = 'quiz-data.json'
+QUESTIONS_JSON_KEY = 'questions'
+
+def load_quiz_questions(json_filepath: str):
+    try:
+        with open(json_filepath, 'r') as file:
+            data = json.load(file)
+
+            if QUESTIONS_JSON_KEY not in data:
+                raise KeyError("Quiz questions not found in JSON structure")
+
+            questions = data[QUESTIONS_JSON_KEY]
+            if not questions:
+                raise ValueError("Quiz questions array is empty")
+
+            return questions
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"{json_filepath} file not found") from e
+    except json.JSONDecodeError as e:
+        raise json.JSONDecodeError(f"Invalid JSON format in {json_filepath}", e.doc, e.pos) from e
+
 # Welcome message for the quiz
 print("Welcome to the Pub Quiz!")
 
-# List of questions, options, and answers
-quiz_questions = [
-    {
-        "question": "What is the capital of France?",
-        "options": ["A) London", "B) Paris", "C) Berlin", "D) Madrid"],
-        "answer": "B"
-    },
-    {
-        "question": "What is 2 + 2?",
-        "options": ["A) 3", "B) 4", "C) 5", "D) 22"],
-        "answer": "B"
-    },
-    # Learners can add more questions here following the same structure
-]
+try:
+    quiz_questions = load_quiz_questions(QUIZ_DATA_JSON_FILEPATH)
+except Exception as e:
+    print(f"Error loading quiz questions: {e}")
+    exit(1)
 
 # Loop through each question
 for question in quiz_questions:
