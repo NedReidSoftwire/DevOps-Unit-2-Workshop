@@ -3,22 +3,22 @@
     {
       "question": "What is the capital of France?",
       "options": [
-        "A) London",
-        "B) Paris", 
-        "C) Berlin",
-        "D) Madrid"
+        "London",
+        "Paris", 
+        "Berlin",
+        "Madrid"
       ],
-      "answer": "B"
+      "answerIndex": 1
     },
     {
       "question": "What is 2 + 2?", 
       "options": [
-        "A) 3",
-        "B) 4",
-        "C) 5",
-        "D) 22"
+        "3",
+        "4",
+        "5",
+        "22"
       ],
-      "answer": "B"
+      "answerIndex": 1
     }
   ]
 }
